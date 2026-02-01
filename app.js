@@ -1,10 +1,5 @@
-let BASE_URL =
-  "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json";
-
 const dropdowns = document.querySelectorAll(".dropdown select");
-
 const btn = document.querySelector("form button");
-
 const fromCurr = document.querySelector(".from select");
 const ToCurr = document.querySelector(".To select");
 const msg = document.querySelector("#msg");
@@ -41,18 +36,11 @@ btn.addEventListener("click", async (evt) => {
     amountVal = 1;
     amount.value = "1";
   }
-  console.log(fromCurr.value, ToCurr.value);
   const URL = `https://api.frankfurter.dev/v1/latest?base=${fromCurr.value}&symbols=${ToCurr.value}`;
   let response = await fetch(URL);
   let data = await response.json();
   let rate = data.rates;
   const values = Object.values(rate);
-  console.log(values[0]);
-  console.log(rate);
-  console.log(amountVal);
-
   let finalAmount = amountVal * values;
-  console.log(finalAmount);
-  msg.innerText = `${amountVal} ${fromCurr.value} = ${finalAmount} ${ToCurr.value}`
-
+  msg.innerText = `${amountVal} ${fromCurr.value} = ${finalAmount} ${ToCurr.value}`;
 });
